@@ -1,3 +1,5 @@
+package com.PrimeiroProjetoJava.PrimeiroProjetoJava;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
