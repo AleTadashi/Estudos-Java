@@ -1,23 +1,40 @@
 package com.PrimeiroProjetoJava.PrimeiroProjetoJava;
 
 import com.PrimeiroProjetoJava.PrimeiroProjetoJava.model.User;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/greeting")
 
+
 public class Controller {
 
-    @GetMapping ("/")
-    public User user ()
+    private List<User> listaUser= new ArrayList<>();
+
+    @GetMapping ("/userByID/{id}")
+    public User user (@PathVariable("id") Long id)
     {
-        User user = new User();
-        user.setId(1L);
-        user.setName("Alexandre Tadashi Shiraiwa");
-        user.setUserName("TATA");
+        Optional<User> userFind = listaUser.stream().filter(user ->user.getId().equals(id)).findFirst();
+        if (userFind.isPresent()){
+            return userFind.get();
+        }
+
+        return  null;
+    }
+    @PostMapping("/")
+    public User user(@RequestBody User user)
+    {
+        listaUser.add(user);
         return user;
     }
+    @GetMapping("/listAllUser")
 
+    public List<User> list()
+    {
+        return listaUser;
+    }
 }
