@@ -1,5 +1,6 @@
 package com.PrimeiroProjetoJava.PrimeiroProjetoJava;
 
+import com.PrimeiroProjetoJava.PrimeiroProjetoJava.model.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,10 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class Controller {
 
     @GetMapping ("/")
-    public String greeting ()
+    public User user ()
     {
-        return "Hello World";
-
+        User user = new User();
+        user.setId(1L);
+        user.setName("Alexandre Tadashi Shiraiwa");
+        user.setUserName("TATA");
+        return user;
     }
 
 }
