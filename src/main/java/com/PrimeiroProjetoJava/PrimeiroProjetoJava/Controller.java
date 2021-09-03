@@ -1,6 +1,8 @@
 package com.PrimeiroProjetoJava.PrimeiroProjetoJava;
 
+import com.PrimeiroProjetoJava.PrimeiroProjetoJava.Service.UserService;
 import com.PrimeiroProjetoJava.PrimeiroProjetoJava.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -13,28 +15,26 @@ import java.util.Optional;
 
 public class Controller {
 
+    @Autowired
+    private UserService userService;
+
     private List<User> listaUser= new ArrayList<>();
 
     @GetMapping ("/userByID/{id}")
-    public User user (@PathVariable("id") Long id)
+    public User user (@PathVariable("id") String id)
     {
-        Optional<User> userFind = listaUser.stream().filter(user ->user.getId().equals(id)).findFirst();
-        if (userFind.isPresent()){
-            return userFind.get();
-        }
-
-        return  null;
+        return this.userService.obterPorCodigo(id);
     }
-    @PostMapping("/")
+
+    @GetMapping ("/allUsers")
+    public List<User> user ()
+    {
+        return this.userService.obterTodos();
+    }
+    @PostMapping("/criarUsuario")
     public User user(@RequestBody User user)
     {
-        listaUser.add(user);
-        return user;
+        return this.userService.criarUsuario(user);
     }
-    @GetMapping("/listAllUser")
 
-    public List<User> list()
-    {
-        return listaUser;
-    }
 }
