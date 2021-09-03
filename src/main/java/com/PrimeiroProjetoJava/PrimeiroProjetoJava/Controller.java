@@ -2,6 +2,7 @@ package com.PrimeiroProjetoJava.PrimeiroProjetoJava;
 
 import com.PrimeiroProjetoJava.PrimeiroProjetoJava.Service.UserService;
 import com.PrimeiroProjetoJava.PrimeiroProjetoJava.model.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,11 +13,10 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/greeting")
 
-
+@RequiredArgsConstructor
 public class Controller {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     private List<User> listaUser= new ArrayList<>();
 
