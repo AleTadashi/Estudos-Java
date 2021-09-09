@@ -3,6 +3,7 @@ package com.PrimeiroProjetoJava.PrimeiroProjetoJava.Impl;
 import com.PrimeiroProjetoJava.PrimeiroProjetoJava.Service.UserService;
 import com.PrimeiroProjetoJava.PrimeiroProjetoJava.model.User;
 import com.PrimeiroProjetoJava.PrimeiroProjetoJava.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -10,10 +11,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 @Repository
+@RequiredArgsConstructor
 public class UserImpl implements UserService {
+
 
     @Autowired
     private UserRepository userRepository;
+
+    public UserImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public List<User> obterTodos() {
